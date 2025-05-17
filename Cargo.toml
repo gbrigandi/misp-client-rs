@@ -1,12 +1,12 @@
 [package]
 name = "misp-client-rs"
 version = "0.1.0"
-authors = ["OpenAPI Generator team and contributors"] # Consider updating to the actual maintainers of this crate
+authors = ["MISP and OpenAPI Generator team and contributors"] 
 description = "A Rust client library for interacting with MISP (Malware Information Sharing Platform) instances via their REST API."
-license = "Unlicense" # Ensure this is the intended license and add a corresponding LICENSE file
+license = "MIT"
 edition = "2021"
 readme = "README.md"
-repository = "https://github.com/your-username/misp-client-rs" # TODO: Update with the actual repository URL
+repository = "https://github.com/gbrigandi/misp-client-rs" 
 keywords = ["misp", "api", "rest", "security", "threat-intelligence", "ioc"]
 categories = ["api-bindings", "network-programming", "web-programming::http-client", "security"]
 
