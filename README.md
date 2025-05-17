@@ -32,7 +32,6 @@ The client supports all major MISP API endpoints, including:
 Add the package to your `Cargo.toml`:
 
 ```toml
-```toml
 [dependencies]
 misp-client-rs = "0.1.0" # Or the version you intend to publish
 ```
