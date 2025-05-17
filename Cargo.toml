@@ -7,7 +7,7 @@ license = "MIT"
 edition = "2021"
 readme = "README.md"
 repository = "https://github.com/gbrigandi/misp-client-rs" 
-keywords = ["misp", "api", "rest", "security", "threat-intelligence", "ioc"]
+keywords = ["misp", "threat-intelligence", "osint", "ioc", "infosec"]
 categories = ["api-bindings", "network-programming", "web-programming::http-client", "security"]
 
 [dependencies]
