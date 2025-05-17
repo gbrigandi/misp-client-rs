@@ -1,0 +1,20 @@
+[package]
+name = "misp-client-rs"
+version = "0.1.0"
+authors = ["OpenAPI Generator team and contributors"] # Consider updating to the actual maintainers of this crate
+description = "A Rust client library for interacting with MISP (Malware Information Sharing Platform) instances via their REST API."
+license = "Unlicense" # Ensure this is the intended license and add a corresponding LICENSE file
+edition = "2021"
+readme = "README.md"
+repository = "https://github.com/your-username/misp-client-rs" # TODO: Update with the actual repository URL
+keywords = ["misp", "api", "rest", "security", "threat-intelligence", "ioc"]
+categories = ["api-bindings", "network-programming", "web-programming::http-client", "security"]
+
+[dependencies]
+serde = { version = "^1.0", features = ["derive"] }
+serde_with = { version = "^3.8", default-features = false, features = ["base64", "std", "macros"] }
+serde_json = "^1.0"
+serde_repr = "^0.1"
+url = "^2.5"
+uuid = { version = "^1.8", features = ["serde", "v4"] }
+reqwest = { version = "^0.12", default-features = false, features = ["json", "multipart"] }

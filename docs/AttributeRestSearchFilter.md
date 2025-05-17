@@ -1,0 +1,56 @@
+# AttributeRestSearchFilter
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**page** | Option<**i32**> |  | [optional]
+**limit** | Option<**i32**> |  | [optional]
+**value** | Option<**String**> |  | [optional]
+**value1** | Option<**String**> |  | [optional]
+**value2** | Option<**String**> |  | [optional]
+**r#type** | Option<[**models::AttributeType**](AttributeType.md)> |  | [optional]
+**category** | Option<[**models::AttributeCategory**](AttributeCategory.md)> |  | [optional]
+**org** | Option<[**models::RestSearchEventsRequestOrg**](restSearchEvents_request_org.md)> |  | [optional]
+**tags** | Option<**Vec<String>**> |  | [optional]
+**from** | Option<**String**> | You can use any of the valid time related filters (examples: 7d, timestamps, [14d, 7d] for ranges, etc.) | [optional]
+**to** | Option<**String**> | You can use any of the valid time related filters (examples: 7d, timestamps, [14d, 7d] for ranges, etc.) | [optional]
+**last** | Option<[**models::LastRestSearchFilter**](LastRestSearchFilter.md)> |  | [optional]
+**eventid** | Option<**String**> |  | [optional]
+**with_attachments** | Option<**bool**> | Extends the response with the base64 representation of the attachment, if there is one | [optional][default to false]
+**uuid** | Option<[**uuid::Uuid**](uuid::Uuid.md)> |  | [optional]
+**publish_timestamp** | Option<**String**> |  | [optional][default to 0]
+**published** | Option<**bool**> |  | [optional][default to false]
+**timestamp** | Option<**String**> |  | [optional][default to 0]
+**attribute_timestamp** | Option<**String**> |  | [optional][default to 0]
+**enforce_warninglist** | Option<**bool**> | Should the warning list be enforced. Adds blocked field for matching attributes | [optional]
+**to_ids** | Option<**bool**> |  | [optional]
+**deleted** | Option<**bool**> | Whether to include soft-deleted attributes. Default value 0. If set to 1, only deleted attributes will be returned. If set to [0,1], both deleted and non-deleted attributes wil be returned. | [optional][default to false]
+**event_timestamp** | Option<**String**> |  | [optional][default to 0]
+**threat_level_id** | Option<[**models::ThreatLevelId**](ThreatLevelId.md)> |  | [optional]
+**eventinfo** | Option<**String**> | Quick event description | [optional]
+**sharinggroup** | Option<**Vec<String>**> | Sharing group ID(s), either as single string or list of IDs | [optional]
+**decaying_model** | Option<**String**> | Specify the decaying model from which the decaying score should be calculated | [optional]
+**score** | Option<**String**> | An alias to override on-the-fly the threshold of the decaying model | [optional]
+**first_seen** | Option<**String**> | Seen within the last x amount of time, where x can be defined in days, hours, minutes (for example 5d or 12h or 30m) | [optional]
+**last_seen** | Option<**String**> | Seen within the last x amount of time, where x can be defined in days, hours, minutes (for example 5d or 12h or 30m) | [optional]
+**include_event_uuid** | Option<**bool**> | Include matching eventUuids in the response | [optional][default to false]
+**include_event_tags** | Option<**bool**> | Include tags of matching events in the response | [optional][default to false]
+**include_proposals** | Option<**bool**> | Include proposals of matching events in the response | [optional][default to false]
+**requested_attributes** | Option<**Vec<String>**> | List of properties that will be selected in the CSV export | [optional]
+**include_context** | Option<**bool**> | Adds events context fields in the CSV export | [optional]
+**headerless** | Option<**bool**> | Removes header in the CSV export | [optional]
+**include_warninglist_hits** | Option<**bool**> |  | [optional]
+**attack_galaxy** | Option<**String**> |  | [optional]
+**object_relation** | Option<**String**> | Filter by the attribute object relation value | [optional]
+**include_sightings** | Option<**bool**> | Extend response with Sightings DB results if the module is enabled | [optional]
+**include_correlations** | Option<**bool**> |  | [optional]
+**model_overrides** | Option<[**models::DecayingModelParameters**](DecayingModelParameters.md)> |  | [optional]
+**include_decay_score** | Option<**bool**> | Include all enabled decaying score | [optional][default to false]
+**include_full_model** | Option<**bool**> | Include all model information of matching events in the response | [optional][default to false]
+**exclude_decayed** | Option<**bool**> | Should the decayed elements by excluded | [optional][default to false]
+**return_format** | Option<[**models::AttributesRestSearchReturnFormat**](AttributesRestSearchReturnFormat.md)> |  | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
