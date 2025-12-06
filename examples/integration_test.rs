@@ -19,7 +19,10 @@ async fn main() -> misp_client::Result<()> {
     match misp.test_connection().await {
         Ok(info) => {
             println!("  ok: MISP {}", info.version);
-            println!("  perm_sync: {}, perm_sighting: {}", info.perm_sync, info.perm_sighting);
+            println!(
+                "  perm_sync: {}, perm_sighting: {}",
+                info.perm_sync, info.perm_sighting
+            );
         }
         Err(e) => {
             println!("  err: {}", e);
@@ -43,7 +46,11 @@ async fn main() -> misp_client::Result<()> {
     let attributes_client = misp.attributes();
     match attributes_client.describe_types().await {
         Ok(types) => {
-            println!("  {} types, {} categories", types.types.len(), types.categories.len());
+            println!(
+                "  {} types, {} categories",
+                types.types.len(),
+                types.categories.len()
+            );
         }
         Err(e) => println!("  err: {}", e),
     }

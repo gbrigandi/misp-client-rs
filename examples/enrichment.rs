@@ -23,7 +23,10 @@ async fn main() -> misp_client::Result<()> {
     } else {
         println!("  {} matches:", results.len());
         for attr in &results {
-            println!("  - Event #{}: {} ({})", attr.event_id, attr.value, attr.attr_type);
+            println!(
+                "  - Event #{}: {} ({})",
+                attr.event_id, attr.value, attr.attr_type
+            );
             if !attr.tags.is_empty() {
                 let tags: Vec<_> = attr.tags.iter().map(|t| t.name.as_str()).collect();
                 println!("    tags: {}", tags.join(", "));
@@ -32,8 +35,10 @@ async fn main() -> misp_client::Result<()> {
     }
 
     let count = misp.sightings().count_for_value(ioc).await?;
-    println!("\nSightings: {} total ({} pos, {} neg)",
-        count.total, count.positive, count.negative);
+    println!(
+        "\nSightings: {} total ({} pos, {} neg)",
+        count.total, count.positive, count.negative
+    );
 
     let warninglists = misp.warninglists();
     if warninglists.is_whitelisted(ioc).await? {

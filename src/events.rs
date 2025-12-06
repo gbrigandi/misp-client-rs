@@ -36,7 +36,10 @@ impl EventsClient {
 
     pub async fn search(&self, query: EventSearchQuery) -> Result<Vec<Event>, MispError> {
         debug!("Searching events");
-        let resp = self.client.post("/events/restSearch", Some(query.to_json())).await?;
+        let resp = self
+            .client
+            .post("/events/restSearch", Some(query.to_json()))
+            .await?;
         parse_rest_search_events(resp)
     }
 
@@ -329,5 +332,7 @@ fn parse_rest_search_events(resp: Value) -> Result<Vec<Event>, MispError> {
     if resp.as_array().is_some() {
         return parse_events_list(resp);
     }
-    Err(MispError::InvalidResponse("unexpected response format".into()))
+    Err(MispError::InvalidResponse(
+        "unexpected response format".into(),
+    ))
 }

@@ -25,12 +25,7 @@ impl MispClientFactory {
     }
 
     fn create_client(&self) -> MispClient {
-        MispClient::with_timeout(
-            &self.base_url,
-            &self.api_key,
-            self.verify_ssl,
-            self.timeout,
-        )
+        MispClient::with_timeout(&self.base_url, &self.api_key, self.verify_ssl, self.timeout)
     }
 
     pub fn events(&self) -> EventsClient {
@@ -139,12 +134,8 @@ impl MispClientFactoryBuilder {
 
     pub fn build(self) -> MispClientFactory {
         MispClientFactory {
-            base_url: self
-                .base_url
-                .expect("base_url is required"),
-            api_key: self
-                .api_key
-                .expect("api_key is required"),
+            base_url: self.base_url.expect("base_url is required"),
+            api_key: self.api_key.expect("api_key is required"),
             verify_ssl: self.verify_ssl.unwrap_or(true),
             timeout: self.timeout.unwrap_or(Duration::from_secs(30)),
         }
@@ -187,9 +178,7 @@ mod tests {
     #[test]
     #[should_panic(expected = "base_url is required")]
     fn builder_requires_base_url() {
-        MispClientFactory::builder()
-            .api_key("test-key")
-            .build();
+        MispClientFactory::builder().api_key("test-key").build();
     }
 
     #[test]

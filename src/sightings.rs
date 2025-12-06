@@ -21,7 +21,10 @@ impl SightingsClient {
         debug!(%attribute_id, "Fetching sightings for attribute");
         let resp = self
             .client
-            .get(&format!("/sightings/listSightings/{}/attribute", attribute_id))
+            .get(&format!(
+                "/sightings/listSightings/{}/attribute",
+                attribute_id
+            ))
             .await?;
         parse_sightings_list(resp)
     }
@@ -86,7 +89,11 @@ impl SightingsClient {
         })
     }
 
-    pub async fn get_timeline(&self, value: &str, limit: Option<u32>) -> Result<Vec<SightingEntry>, MispError> {
+    pub async fn get_timeline(
+        &self,
+        value: &str,
+        limit: Option<u32>,
+    ) -> Result<Vec<SightingEntry>, MispError> {
         let mut query = SightingSearchQuery::new().value(value);
         if let Some(l) = limit {
             query = query.limit(l);
@@ -264,7 +271,9 @@ fn parse_sightings_list(resp: Value) -> Result<Vec<Sighting>, MispError> {
     if resp.is_object() && resp.get("Sighting").is_none() {
         return Ok(Vec::new());
     }
-    Err(MispError::InvalidResponse("unexpected sightings format".into()))
+    Err(MispError::InvalidResponse(
+        "unexpected sightings format".into(),
+    ))
 }
 
 fn parse_sightings_search(resp: Value) -> Result<Vec<Sighting>, MispError> {

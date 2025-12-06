@@ -37,7 +37,10 @@ async fn main() -> misp_client::Result<()> {
             println!("  Related IOCs in event: {}", related_attrs.len());
             for related in related_attrs.iter().take(5) {
                 if related.id != attr.id {
-                    println!("    - {} ({}): {}", related.attr_type, related.category, related.value);
+                    println!(
+                        "    - {} ({}): {}",
+                        related.attr_type, related.category, related.value
+                    );
                 }
             }
         }
@@ -55,7 +58,10 @@ async fn main() -> misp_client::Result<()> {
     println!("\n  Sightings...");
     let sighting_count = misp.sightings().count_for_value(suspicious_ip).await?;
     println!("  Total sightings: {}", sighting_count.total);
-    println!("  Positive: {}, Negative: {}", sighting_count.positive, sighting_count.negative);
+    println!(
+        "  Positive: {}, Negative: {}",
+        sighting_count.positive, sighting_count.negative
+    );
 
     println!("\n--- Threat Hunting ---\n");
 
@@ -95,7 +101,10 @@ async fn main() -> misp_client::Result<()> {
         println!("  - Threat Actors: {} clusters", ta_galaxy.clusters.len());
     }
     if let Some(attack_galaxy) = galaxies.get_mitre_attack().await? {
-        println!("  - MITRE ATT&CK: {} techniques", attack_galaxy.clusters.len());
+        println!(
+            "  - MITRE ATT&CK: {} techniques",
+            attack_galaxy.clusters.len()
+        );
     }
     if let Some(malware_galaxy) = galaxies.get_malware().await? {
         println!("  - Malware: {} families", malware_galaxy.clusters.len());

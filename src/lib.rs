@@ -11,7 +11,7 @@ pub mod search;
 pub mod sightings;
 pub mod warninglists;
 
-pub use attributes::{AttributeSearchQuery, AttributesClient, AttributeTypes};
+pub use attributes::{AttributeSearchQuery, AttributeTypes, AttributesClient};
 pub use client::MispClient;
 pub use client_factory::{MispClientFactory, MispClientFactoryBuilder, MispClients, ServerInfo};
 pub use error::MispError;
@@ -23,7 +23,9 @@ pub use models::{
     WarninglistCheckResult, WarninglistMatch,
 };
 pub use search::SearchBuilder;
-pub use sightings::{SightingCount, SightingEntry, SightingSearchQuery, SightingType, SightingsClient};
+pub use sightings::{
+    SightingCount, SightingEntry, SightingSearchQuery, SightingType, SightingsClient,
+};
 pub use warninglists::WarninglistsClient;
 
 pub type Result<T> = std::result::Result<T, MispError>;

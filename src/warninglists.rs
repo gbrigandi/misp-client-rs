@@ -25,7 +25,10 @@ impl WarninglistsClient {
 
     pub async fn list_enabled(&self) -> Result<Vec<Warninglist>, MispError> {
         let all = self.list().await?;
-        Ok(all.into_iter().filter(|w| w.enabled == Some(true)).collect())
+        Ok(all
+            .into_iter()
+            .filter(|w| w.enabled == Some(true))
+            .collect())
     }
 
     pub async fn get(&self, id: &str) -> Result<Warninglist, MispError> {
@@ -47,7 +50,10 @@ impl WarninglistsClient {
         parse_check_result(resp, value)
     }
 
-    pub async fn check_values(&self, values: &[&str]) -> Result<Vec<WarninglistCheckResult>, MispError> {
+    pub async fn check_values(
+        &self,
+        values: &[&str],
+    ) -> Result<Vec<WarninglistCheckResult>, MispError> {
         debug!(count = values.len(), "Checking values against warninglists");
         let body = json!({ "value": values });
         let resp = self
@@ -62,7 +68,10 @@ impl WarninglistsClient {
         Ok(result.matched)
     }
 
-    pub async fn get_matching_lists(&self, value: &str) -> Result<Vec<WarninglistMatch>, MispError> {
+    pub async fn get_matching_lists(
+        &self,
+        value: &str,
+    ) -> Result<Vec<WarninglistMatch>, MispError> {
         let result = self.check_value(value).await?;
         Ok(result.warninglists)
     }
@@ -93,14 +102,18 @@ fn parse_warninglists(resp: Value) -> Result<Vec<Warninglist>, MispError> {
             .collect();
         return lists.map_err(MispError::Parse);
     }
-    Err(MispError::InvalidResponse("unexpected warninglists format".into()))
+    Err(MispError::InvalidResponse(
+        "unexpected warninglists format".into(),
+    ))
 }
 
 fn parse_warninglist(resp: Value) -> Result<Warninglist, MispError> {
     if let Some(wl) = resp.get("Warninglist") {
         return serde_json::from_value(wl.clone()).map_err(MispError::Parse);
     }
-    Err(MispError::InvalidResponse("missing Warninglist wrapper".into()))
+    Err(MispError::InvalidResponse(
+        "missing Warninglist wrapper".into(),
+    ))
 }
 
 fn parse_check_result(resp: Value, value: &str) -> Result<WarninglistCheckResult, MispError> {
@@ -118,7 +131,10 @@ fn parse_check_result(resp: Value, value: &str) -> Result<WarninglistCheckResult
                     .filter_map(|item| {
                         let id = item.get("id")?.as_str()?.to_string();
                         let name = item.get("name")?.as_str()?.to_string();
-                        let matched_entry = item.get("matched").and_then(|m| m.as_str()).map(String::from);
+                        let matched_entry = item
+                            .get("matched")
+                            .and_then(|m| m.as_str())
+                            .map(String::from);
                         Some(WarninglistMatch {
                             id,
                             name,
@@ -139,7 +155,10 @@ fn parse_check_result(resp: Value, value: &str) -> Result<WarninglistCheckResult
     })
 }
 
-fn parse_check_results(resp: Value, values: &[&str]) -> Result<Vec<WarninglistCheckResult>, MispError> {
+fn parse_check_results(
+    resp: Value,
+    values: &[&str],
+) -> Result<Vec<WarninglistCheckResult>, MispError> {
     values
         .iter()
         .map(|v| parse_check_result(resp.clone(), v))

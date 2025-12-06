@@ -293,7 +293,9 @@ fn parse_attribute_response(resp: Value) -> Result<Attribute, MispError> {
     if let Some(attr) = resp.get("Attribute") {
         return serde_json::from_value(attr.clone()).map_err(MispError::Parse);
     }
-    Err(MispError::InvalidResponse("missing Attribute wrapper".into()))
+    Err(MispError::InvalidResponse(
+        "missing Attribute wrapper".into(),
+    ))
 }
 
 fn parse_rest_search_attributes(resp: Value) -> Result<Vec<Attribute>, MispError> {
@@ -326,9 +328,9 @@ fn parse_rest_search_attributes(resp: Value) -> Result<Vec<Attribute>, MispError
 }
 
 fn parse_describe_types(resp: Value) -> Result<AttributeTypes, MispError> {
-    let result = resp.get("result").ok_or_else(|| {
-        MispError::InvalidResponse("missing result in describeTypes".into())
-    })?;
+    let result = resp
+        .get("result")
+        .ok_or_else(|| MispError::InvalidResponse("missing result in describeTypes".into()))?;
 
     let types = result
         .get("types")
@@ -353,7 +355,10 @@ fn parse_describe_types(resp: Value) -> Result<AttributeTypes, MispError> {
         .unwrap_or_default();
 
     let mut category_type_mappings = std::collections::HashMap::new();
-    if let Some(mappings) = result.get("category_type_mappings").and_then(|v| v.as_object()) {
+    if let Some(mappings) = result
+        .get("category_type_mappings")
+        .and_then(|v| v.as_object())
+    {
         for (cat, types_val) in mappings {
             if let Some(arr) = types_val.as_array() {
                 let type_list: Vec<String> = arr

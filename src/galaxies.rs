@@ -50,7 +50,10 @@ impl GalaxiesClient {
         parse_clusters_search(resp)
     }
 
-    pub async fn search_clusters_by_value(&self, value: &str) -> Result<Vec<GalaxyCluster>, MispError> {
+    pub async fn search_clusters_by_value(
+        &self,
+        value: &str,
+    ) -> Result<Vec<GalaxyCluster>, MispError> {
         self.search_clusters(ClusterSearchQuery::new().value(value))
             .await
     }
@@ -166,7 +169,9 @@ fn parse_galaxies_list(resp: Value) -> Result<Vec<Galaxy>, MispError> {
             .collect();
         return galaxies.map_err(MispError::Parse);
     }
-    Err(MispError::InvalidResponse("expected array of galaxies".into()))
+    Err(MispError::InvalidResponse(
+        "expected array of galaxies".into(),
+    ))
 }
 
 fn parse_galaxy_response(resp: Value) -> Result<Galaxy, MispError> {
@@ -187,7 +192,9 @@ fn parse_cluster_response(resp: Value) -> Result<GalaxyCluster, MispError> {
     if let Some(cluster) = resp.get("GalaxyCluster") {
         return serde_json::from_value(cluster.clone()).map_err(MispError::Parse);
     }
-    Err(MispError::InvalidResponse("missing GalaxyCluster wrapper".into()))
+    Err(MispError::InvalidResponse(
+        "missing GalaxyCluster wrapper".into(),
+    ))
 }
 
 fn parse_clusters_search(resp: Value) -> Result<Vec<GalaxyCluster>, MispError> {

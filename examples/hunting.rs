@@ -17,7 +17,9 @@ async fn main() -> misp_client::Result<()> {
     let recent_iocs = search
         .recent("24h")
         .to_ids_only()
-        .types(vec!["ip-dst", "ip-src", "domain", "hostname", "md5", "sha256"])
+        .types(vec![
+            "ip-dst", "ip-src", "domain", "hostname", "md5", "sha256",
+        ])
         .limit(50)
         .attributes()
         .await?;
@@ -41,11 +43,7 @@ async fn main() -> misp_client::Result<()> {
     }
 
     println!("\nAPT29 events:");
-    let apt_events = search
-        .threat_actor("APT29")
-        .limit(5)
-        .execute()
-        .await?;
+    let apt_events = search.threat_actor("APT29").limit(5).execute().await?;
 
     println!("  {} events", apt_events.len());
     for event in &apt_events {
